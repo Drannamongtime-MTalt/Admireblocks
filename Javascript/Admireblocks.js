@@ -1,10 +1,15 @@
 class AdmireBlocks {
+
+    constructor() {}
+
     getInfo() {
       return {
         color1: "#8b7fc9",
         color2: "#8b7fc9",
         id: 'admireBlocks',
         name: 'AdmireBlocks',
+        menuIconURI: 'https://drannamongtime-mtalt.github.io/Admireblocks/adl.svg',
+        blockIconURI: 'https://drannamongtime-mtalt.github.io/Admireblocks/adl.svg',
 
         blocks: [
           {
@@ -180,6 +185,32 @@ class AdmireBlocks {
             disableMonitor: true
             },
             {
+                opcode: 'menuNum',
+                blockType: Scratch.BlockType.REPORTER,
+                text: 'Numbers [MENUNUM]',
+                arguments: {
+                    MENUNUM: {
+                    type: Scratch.ArgumentType.STRING,
+                    menu: 'numbersmenu',
+                    disableMonitor: true
+                    
+                  }
+                }
+                },
+                {
+                    opcode: 'menuAlpha',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Letters in the english alphabet [INTHEALPHABET]',
+                    arguments: {
+                        INTHEALPHABET: {
+                        type: Scratch.ArgumentType.STRING,
+                        menu: 'litea',
+                        disableMonitor: true
+                        
+                      }
+                    }
+                    },
+            {
                 opcode: 'infinity',
                 blockType: Scratch.BlockType.REPORTER,
                 text: 'infinity',
@@ -252,14 +283,56 @@ class AdmireBlocks {
                     }
                   },
                   {
+                    opcode: 'ltn',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: '[TRRR] to numbers (A = 1, B = 2, C = 3)',
+                    arguments: {
+                        TRRR: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: 'Admireblocks'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'replace',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Replace [REGEX] with [NEWSTRING] in [THEINPUT]',
+                    arguments: {
+                        REGEX: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: ' '
+                      },
+                      NEWSTRING: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: ' '
+                      },
+                      THEINPUT: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: ' '
+                      }
+                    }
+                  },
+                  {
                     opcode: 'Crash',
                     blockType: Scratch.BlockType.COMMAND,
                     text: '(DANGEROUS!) Crash the window',
                   }
     
-    ]
+    ],
+    menus: {
+        numbersmenu: {
+          items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+          acceptReporters: false,
+        },
+          litea: {
+            items: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+            acceptReporters: false
+    }
+  }
+
   }
 }
+
     txtToBASE64(args) {
         return btoa(args.TEXT)
 
@@ -671,6 +744,7 @@ class AdmireBlocks {
         "S": "... ",
         "T": "- ",
         "U": "..- ",
+        "V": "...- ",
         "W": ".-- ",
         "X": "-..- ",
         "Y": "-.-- ",
@@ -868,17 +942,68 @@ class AdmireBlocks {
         return args.STRINGTOLOWERCASE.toLowerCase();
         
       }
-      Pickarandomnumber(args) {
+      replace({THEINPUT, REGEX, NEWSTRING}) {
+        return THEINPUT.toString().replace(new RegExp(REGEX, 'gi'), NEWSTRING);
+        
+      }
+      Pickarandomnumber() {
         let rans = Math.floor((Math.random() * 9) + 1);
         return rans
+        
       }
-      Pickarandomletter(args) {
+      menuNum({MENUNUM}) {
+        return MENUNUM;
+        
+      }
+      menuAlpha({INTHEALPHABET}) {
+        return INTHEALPHABET;
+        
+      }
+      Pickarandomletter() {
         const randomLetter = ('abcdefghijklmnopqrstuvwxyz').split('')[(Math.floor(Math.random() * 26 ))];
         return randomLetter
       }
-      Pickarandomsymbol(args) {
+      Pickarandomsymbol() {
         const randomSymbol = ('!@#$%^&*()_+}{|/?').split('')[(Math.floor(Math.random() * 17 ))];
         return randomSymbol
+      }
+      ltn(args) {
+        //a = 1, b = 2, c = 3
+        const tonum = {
+            "A": "1",
+            "B": "2",
+            "C": "3",
+            "D": "4",
+            "E": "5",
+            "F": "6",
+            "G": "7",
+            "H": "8",
+            "I": "9",
+            "J": "10",
+            "K": "11",
+            "L": "12",
+            "M": "13",
+            "N": "14",  
+            "O": "15",
+            "P": "16",
+            "Q": "17",
+            "R": "18",
+            "S": "19",
+            "T": "20",
+            "U": "21",
+            "V": "22",
+            "W": "23",
+            "X": "24",
+            "Y": "25",
+            "Z": "26",
+            " ": " ",
+          }
+          const convertToNum = (str) => {
+            return str.toUpperCase().split("").map(el => {
+               return tonum[el] ? tonum[el] : el;
+            }).join("");
+          };
+          return convertToNum(args.TRRR);
       }
     text2rot13(args) {
         //credits to Hello dev world
