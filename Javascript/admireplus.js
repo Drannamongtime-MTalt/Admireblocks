@@ -1,10 +1,9 @@
-
 class admireplus {
   constructor(runtime, id) {
   
     this.runtime = runtime;
-    this.menuIconURI = null;
-    this.blockIconURI = null;
+    this.menuIconURI = "https://drannamongtime-mtalt.github.io/Admireblocks/adlp.svg";
+    this.blockIconURI = "https://drannamongtime-mtalt.github.io/Admireblocks/adilp.svg" ;
     this.colorScheme = ["#8b7fc9", "#8b7fc9"];
 
     this.deleted_sprites = {};
@@ -128,7 +127,7 @@ class admireplus {
         },
         {
           opcode: "sounds_done",
-          blockType: "boolean",
+          blockType: "bool",
           text: "Is the audio from URL Done?",
         },
         {
