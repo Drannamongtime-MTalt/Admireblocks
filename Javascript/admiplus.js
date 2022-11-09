@@ -44,6 +44,32 @@ class admireplus {
               },
             },
           },
+          {
+            opcode: "movewindow",
+            blockType: "command",
+            text: "Move window by left [atr], down [pem]",
+            arguments: {
+              atr: {
+                type: "number",
+                defaultValue: "15",
+                pem: {
+                    type: "number",
+                    defaultValue: "15"
+                }
+              },
+            },
+          },
+        {
+            opcode: "openlink",
+            blockType: "command",
+            text: "Open URL [meh]",
+            arguments: {
+                meh: {
+                type: "number",
+                defaultValue: "https://scratch.mit.edu/",
+              },
+            },
+          },
         {
           opcode: "csu",
           blockType: "command",
@@ -115,7 +141,7 @@ class admireplus {
           arguments: {
             URL: {
               type: "string",
-              defaultValue: "",
+              defaultValue: " ",
             },
           },
         },
@@ -127,7 +153,7 @@ class admireplus {
         },
         {
           opcode: "sounds_done",
-          blockType: "bool",
+          blockType: "reporter",
           text: "Is the audio from URL Done?",
         },
         {
@@ -173,6 +199,15 @@ class admireplus {
       console.error(e);
     }
   }
+
+  async movewindow(args) {
+   window.moveBy(args.atr, args.pem);
+    }
+
+    async openlink(args) {
+        window.open(args.meh)
+         }
+
   async ds(args, util) {
     try {
       var sprite = util.target;
