@@ -58,8 +58,8 @@ class admireplus {
                     filex: {
                         type: "string",
                         defaultValue: "txt",   
-                    }
-                }
+                    },
+                },
               },
             },
           },
