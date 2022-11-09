@@ -47,15 +47,11 @@ class admireplus {
           {
             opcode: "movewindow",
             blockType: "command",
-            text: "Move window by left [atr], down [pem]",
+            text: "Move window by [atr]",
             arguments: {
               atr: {
                 type: "number",
                 defaultValue: "15",
-                pem: {
-                    type: "number",
-                    defaultValue: "15"
-                }
               },
             },
           },
@@ -77,7 +73,7 @@ class admireplus {
           arguments: {
             url: {
               type: "string",
-              defaultValue: "",
+              defaultValue: " ",
             },
           },
         },
@@ -201,7 +197,7 @@ class admireplus {
   }
 
   async movewindow(args) {
-   window.moveBy(args.atr, args.pem);
+   window.moveBy(args.atr);
     }
 
     async openlink(args) {
