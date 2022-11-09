@@ -9,7 +9,7 @@ class AdmireBlocks {
         id: 'admireBlocks',
         name: 'AdmireBlocks',
         menuIconURI: 'https://drannamongtime-mtalt.github.io/Admireblocks/adl.svg',
-        blockIconURI: 'https://drannamongtime-mtalt.github.io/Admireblocks/adl.svg',
+        blockIconURI: 'https://drannamongtime-mtalt.github.io/Admireblocks/adil.svg',
 
         blocks: [
           {
@@ -90,7 +90,7 @@ class AdmireBlocks {
 },
 {
     opcode: 'colorhex',
-    blockType: Scratch.BlockType.BOOLEAN,
+    blockType: Scratch.BlockType.REPORTER,
     text: '[COLOR] HEX code',
     arguments: {
         COLOR: {
@@ -309,6 +309,105 @@ class AdmireBlocks {
                       THEINPUT: {
                         type: Scratch.ArgumentType.STRING,
                         defaultValue: ' '
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'genr',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Generate a random string with the lenght of [TER]',
+                    arguments: {
+                        TER: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '5'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'genrsy',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: '(With symbols) Generate a random string with the lenght of [MPR]',
+                    arguments: {
+                        MPR: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '5'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'genrnum',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: '(Only numbers) Generate a random string with the lenght of [TEH]',
+                    arguments: {
+                        TEH: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '5'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'genrosy',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: '(Only symbols) Generate a random string with the lenght of [LETA]',
+                    arguments: {
+                        LETA: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '5'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'lgenral',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: '(Only lowercase letters) Generate a random string with the lenght of [ETA]',
+                    arguments: {
+                        ETA: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '5'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'ugenral',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: '(Only uppercase letters) Generate a random string with the lenght of [UETA]',
+                    arguments: {
+                        UETA: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '5'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'removews',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Remove whitespaces from [TERA]',
+                    arguments: {
+                        TERA: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: 'Admire blocks'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'jhd',
+                    blockType: Scratch.BlockType.REPORTER,
+                    text: 'Titlecase [ERR]',
+                    arguments: {
+                        ERR: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: 'admireblocks is so cool!'
+                      }
+                    }
+                  },
+                  {
+                    opcode: 'chance',
+                    blockType: Scratch.BlockType.BOOLEAN,
+                    text: '[A]% Chance',
+                    arguments: {
+                        A: {
+                        type: Scratch.ArgumentType.NUMBER,
+                        defaultValue: '50'
                       }
                     }
                   },
@@ -822,6 +921,17 @@ class AdmireBlocks {
         return args.COLOR;
 
       }
+      jhd(args) {
+        function titleCase(str) {
+            str = str.toLowerCase().split(' ');
+            for (var i = 0; i < str.length; i++) {
+              str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+            }
+            return str.join(' ');
+          }
+          return titleCase(args.ERR);
+
+      }
       txtToSHA256(args) {
         var sha256 = function sha256(ascii) {
             function rightRotate(value, amount) {
@@ -938,6 +1048,10 @@ class AdmireBlocks {
         return args.STRINGTOUPPERCASE.toUpperCase();
         
       }
+      removews(args) {
+        return args.TERA.replace(/\s/g, "");
+        
+      }
       STRINGTOL(args) {
         return args.STRINGTOLOWERCASE.toLowerCase();
         
@@ -957,6 +1071,88 @@ class AdmireBlocks {
       }
       menuAlpha({INTHEALPHABET}) {
         return INTHEALPHABET;
+        
+      }
+      chance({A}) {
+        return Math.random() <= A / 100;
+        
+      }
+      genr(args) {
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        return makeid(args.TER);
+        
+      }
+      genrsy(args) {
+        function makeidsy(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+}{|/?';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        return makeidsy(args.MPR);
+        
+      }
+      genrosy(args) {
+        function makeidosy(length) {
+            var result           = '';
+            var characters       = '!@#$%^&*()_+}{|/?';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        return makeidosy(args.LETA);
+        
+      }
+      genrnum(args) {
+        function makeidnum(length) {
+            var result           = '';
+            var characters       = '0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        return makeidnum(args.TEH);
+        
+      }
+      lgenral(args) {
+        function lmakeidol(length) {
+            var result           = '';
+            var characters       = 'abcdefghijklmnopqrstuvwxyz';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        return lmakeidol(args.ETA);
+        
+      }
+      ugenral(args) {
+        function umakeidol(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+        return umakeidol(args.UETA);
         
       }
       Pickarandomletter() {
@@ -1027,6 +1223,7 @@ class AdmireBlocks {
           while(true) {
             // The loop will cause the crash.
           }
+          
         
     }
   }
