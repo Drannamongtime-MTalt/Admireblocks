@@ -45,13 +45,21 @@ class admireplus {
             },
           },
           {
-            opcode: "movewindow",
+            opcode: "df",
             blockType: "command",
-            text: "Move window by [atr]",
+            text: "Save file [fn], contents: [cont], file extension [filex]",
             arguments: {
-              atr: {
-                type: "number",
-                defaultValue: "15",
+              fn: {
+                type: "string",
+                defaultValue: "admireblock+",
+                 cont: {
+                    type: "string",
+                    defaultValue: "try admireblocks+!",   
+                    filex: {
+                        type: "string",
+                        defaultValue: "txt",   
+                    }
+                }
               },
             },
           },
@@ -275,6 +283,33 @@ class admireplus {
 
   async evalsom(args) {
     eval(args.es);
+   }
+
+  df(args) {
+    function createBlob(data) {
+        return new Blob([data], { type: "text/plain" });
+      }
+      
+      function saveAs(content, fileName) {
+        const a = document.createElement("a");
+        const isBlob = content.toString().indexOf("Blob") > -1;
+        let url = content;
+        if (isBlob) {
+          url = window.URL.createObjectURL(content);
+        }
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        if (isBlob) {
+          window.URL.revokeObjectURL(url);
+        }
+      }
+      
+      function downloadFile() {
+        const file = createBlob(args.cont);
+        saveAs(file, args.fn.args.filex);
+      }
+      downloadFile(args.fn);
    }
 
   stopAudio({}) {
