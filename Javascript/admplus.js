@@ -1,98 +1,290 @@
 
-// create by scratch3-extension generator
-const ArgumentType = Scratch.ArgumentType;
-const BlockType = Scratch.BlockType;
-const formatMessage = Scratch.formatMessage;
-const log = Scratch.log;
-
-const menuIconURI = "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxMDAuNjQ0NzEiIGhlaWdodD0iOTYuMTU2NDciIHZpZXdCb3g9IjAsMCwxMDAuNjQ0NzEsOTYuMTU2NDciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xODkuNjk2MDMsLTEzMS44MzI3NSkiPjxnIGRhdGEtcGFwZXItZGF0YT0ieyZxdW90O2lzUGFpbnRpbmdMYXllciZxdW90Ozp0cnVlfSIgZmlsbC1ydWxlPSJub256ZXJvIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6IG5vcm1hbCI+PHBhdGggZD0iTTE5MC43MDAxOCwyMjYuOTg5MjJsMC4zODgzOSwtOTMuOTc4NDNsOTUuMDcxNzYsMTUuNzEzNDRsMy4xMzk1LDc4LjI2NDk5eiIgZGF0YS1wYXBlci1kYXRhPSJ7JnF1b3Q7aW5kZXgmcXVvdDs6bnVsbH0iIGZpbGw9IiM4YjdmYzkiIHN0cm9rZT0iIzc3NmNhYiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTI2OC4zMjY5NSwyMDMuMzU2OGMtMC40NTkxOSwwLjUyMzgyIC0xLjQwNjU1LDEuMDQ1NDMgLTIuODQzMjEsMS41NjgxN2MtNS4zNjIwNywyLjA5MjAxIC05Ljk2NzMsNC42NzMyNiAtMTMuODIyNSw3Ljc0NDk0Yy0wLjcyLDAuNTIyNzEgLTEuOTk2MTQsMC44MTU4NiAtMy44MjUxMiwwLjg4MTYxYy0wLjUyMzgyLDAgLTEuMDYzMjcsLTAuMjI5NjIgLTEuNjE3MTcsLTAuNjg1NDVjLTAuNTU2MTUsLTAuNDU2OTQgLTAuODMzNjgsLTAuOTgwOCAtMC44MzM2OCwtMS41NjgxN2MwLC0wLjc4NDYyIDAuODgyNzEsLTEuNzk2NjMgMi42NDcwMSwtMy4wNDA0N2MxLjI0MDQ4LC0wLjc4MzUyIDIuNDg0MzIsLTEuNjAxNTggMy43MjcwMywtMi40NTA4OGMwLjA2MzUyLC0wLjMyNTQzIC0xLjAxNDI0LC00LjE4MTc0IC0zLjIzODg1LC0xMS41Njc3OGMtMy41OTc3MiwtMC4wNjQ2MyAtOS4yNTYyNCwxLjExMDA4IC0xNi45NzMzLDMuNTI3NTJjLTAuNDU5MTksMC4xMzE1IC0wLjcyMTEsMC4zOTIzMSAtMC43ODU3NSwwLjc4NDYyYy0wLjA2NTc1LDAuMzkyMzEgLTAuMTYzODQsMS4wNDQzMyAtMC4yOTQyNSwxLjk1OTM3Yy0wLjEyNTk1LDAuMTk2MTggLTAuMjUwNzcsMC40ODkyNyAtMC4zNzU1OSwwLjg4MTU5YzAsMC4yNjE5MSAwLjM3NTU5LDAuNTQwNTQgMS4xMjc5LDAuODM0NzhjMC43NTAwOCwwLjI5NTM1IDEuMjI2MDEsMC41NzQgMS40MjEwNCwwLjgzMzY4YzAuMTk2MTgsMC4yNjE5MSAwLjI5NDI1LDAuNTg3MzYgMC4yOTQyNSwwLjk4MDhjMCwwLjc4MzUyIC0wLjM0MzI4LDEuNTIwMjMgLTEuMDI5ODYsMi4yMDY3OWMtMC42ODU0NSwwLjY4NTQ1IC0xLjUxOTEzLDEuMDI4NzEgLTIuNDk4ODEsMS4wMjg3MWMwLjA2NDYzLDAgLTEuMTEyMzEsLTAuMTYyNzIgLTMuNTI5NzQsLTAuNDg5MjdjLTAuNDU4MDksLTAuMDY0NjMgLTMuNDMxNjUsLTAuMzI2NTYgLTguOTIxODcsLTAuNzgzNWMtMi42MTQ3MiwtMC4yNjA4MSAtNC4zNDY3LC0wLjY1MzE0IC01LjE5NDg3LC0xLjE3Njk2Yy0wLjU4ODQ5LC0wLjM5MjMxIC0wLjg4Mjc0LC0wLjkxNTA1IC0wLjg4Mjc0LC0xLjU2ODE3YzAsLTEuNTY5MjcgMC43ODQ2MiwtMi40ODQzMiAyLjM1MjgxLC0yLjc0NTEyYzAuOTEzOTIsLTAuMTMwNCAyLjA5MDg4LC0wLjA2NTc1IDMuNTI4NjQsMC4xOTYxOGMwLjMyNjU2LDAuMTMxNSAyLjkwNjcxLDAuMzU4OSA3Ljc0NDk0LDAuNjg1NDVjMC4zOTIzMSwtMi43NDUxMiAxLjA0NTQzLC02LjU2OTExIDEuOTYwNDgsLTExLjQ2OTcyYzIuMDI1MTMsLTguMDM5MTkgNC4xNTA1NSwtMTguMjM0OTYgNi4zNzI5NiwtMzAuNTg3MzljLTAuNjU0MjQsLTAuMTI5MyAtMS4zMzk2NSwtMC4xOTYxOCAtMi4wNTg1NCwtMC4xOTYxOGMtMS4yNDI3MSwwIC0zLjA4ODQsMC4zNTk5NyAtNS41NDAzOCwxLjA3ODg3Yy0yLjQ0OTc4LDAuNzIgLTQuMjY0MjMsMS4wNzg4NyAtNS40NDExOSwxLjA3ODg3Yy0wLjQ1Njk0LDAgLTEuMTExMTgsLTAuMzU3NzcgLTEuOTYwNDgsLTEuMDc4ODdjLTAuMjYxOTEsLTAuNzg0NjIgLTAuMDgyNDcsLTEuNDg1NjcgMC41MzgzMSwtMi4xMDc1OGMwLjYyMDc4LC0wLjYyMDc4IDEuMzA3MzYsLTAuOTk2MzkgMi4wNTk2NywtMS4xMjc5YzAuNzUxMjEsLTAuMTMwNCAxLjk0MzczLC0wLjM1ODkgMy41Nzg4LC0wLjY4NjU2YzIuODA5NzUsLTAuNTIyNzEgNi4yMDc5OSwtMC45MTM5MiAxMC4xOTQ2NywtMS4xNzY5M2MxLjg5NDcyLC0wLjEyOTMgMi44NzU1MywtMC4xOTYxOCAyLjk0MTI1LC0wLjE5NjE4YzEuMDQ1NDMsMC4xMzE1IDEuODMwMDcsMC42Mzc1IDIuMzUyODEsMS41MTkxM2MwLjUyMjcxLDAuODgyNzEgMS4wNDU0NSwyLjMwMzc1IDEuNTY4MTcsNC4yNjQyM2MwLjY1MzEyLDIuNDE5NjQgMS4wOTMzNiwzLjg4OTc0IDEuMzI0MDYsNC40MTI0OGMwLjIyODQ3LDAuNTIzODIgMC42MDQwOCwxLjM3MjAxIDEuMTI3OTIsMi41NDg5NGMwLjI1OTY4LDAuNzgzNTIgMC43NTAwOCwxLjk2MDQ4IDEuNDcwMDgsMy41Mjg2MmMxLjUwMzUyLDMuNTk1NSAzLjg1NTE4LDkuMjE2MTIgNy4wNTk0OSwxNi44NjE4NWMxLjE3NTgzLDMuMTM3NDMgMy4wMzkzNyw3LjkwOTg5IDUuNTg4MzEsMTQuMzE0MDNjMS4xMTAwOCwtMC4xMzA0IDIuNTQ4OTQsLTAuNjg2NTggNC4zMTIxNCwtMS42NjYyNmMxLjc2NTQyLC0wLjk4MDggMy4wNzE2OCwtMS40NzAwOCAzLjkyMzE4LC0xLjQ3MDA4YzAuNzgzNTIsMCAxLjUzNDcsMC4yOTQyNSAyLjI1NDcsMC44ODE1OWMwLjE5NjE4LDAuMTk2MTggMC4zNTY2NywwLjY4NjU2IDAuNDg5MywxLjQ3MDA4YzAuMDY1NzUsMC44NTE1IC0wLjAzMjM0LDEuNDM5OTkgLTAuMjkyMDIsMS43NjY1MnpNMjQ2LjU2MjI0LDE4OS4xNDUzMmMtMS4xMTU2NiwtMi4xNTY2MyAtMi41MjMzMSwtNS40MjY3IC00LjIyNjMxLC05LjgwNzk0Yy0wLjY1NTM0LC0xLjUwMzUyIC0yLjQyMzAyLC01LjQyNTU3IC01LjMwNjMzLC0xMS43Njk1MmwtNC44NDgyNCwyNC43MTU5OWM1Ljg3MDI3LC0xLjExMDA4IDEwLjQ2NjY0LC0xLjk2MDQ4IDEzLjc5MzU0LC0yLjU1MDA3YzAuMzkxMjEsLTAuMjU5NjggMC41ODczNiwtMC40NTY5NCAwLjU4NzM2LC0wLjU4ODQ5eiIgZGF0YS1wYXBlci1kYXRhPSJ7JnF1b3Q7aW5kZXgmcXVvdDs6bnVsbH0iIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PHRleHQgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjUxLjY5ODU0LDE5NS4xNjY0NCkgc2NhbGUoMC45MTY1NywwLjkxNjU3KSIgZm9udC1zaXplPSI0MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgZGF0YS1wYXBlci1kYXRhPSJ7JnF1b3Q7aW5kZXgmcXVvdDs6bnVsbH0iIGZpbGw9IiNmZmZmZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJTYW5zIFNlcmlmIiBmb250LXdlaWdodD0ibm9ybWFsIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48dHNwYW4geD0iMCIgZHk9IjAiPis8L3RzcGFuPjwvdGV4dD48L2c+PC9nPjwvc3ZnPjwhLS1yb3RhdGlvbkNlbnRlcjo1MC4zMDM5NjYyOTY2NDk1NTo0OC4xNjcyNTMxOTY1NzQ2Mi0tPg==";
-const blockIconURI = "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI2Mi4zNDg1MiIgaGVpZ2h0PSI1OC42MjU4NSIgdmlld0JveD0iMCwwLDYyLjM0ODUyLDU4LjYyNTg1Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjExLjExOTA1LC0xNTAuNjg3MDgpIj48ZyBkYXRhLXBhcGVyLWRhdGE9InsmcXVvdDtpc1BhaW50aW5nTGF5ZXImcXVvdDs6dHJ1ZX0iIGZpbGw9IiNmZmZmZmYiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMjY4LjU2OTEzLDE5OS4xMTgyMWMtMC40NTkxOSwwLjUyMzgyIC0xLjQwNjU1LDEuMDQ1NDMgLTIuODQzMjEsMS41NjgxN2MtNS4zNjIwNywyLjA5MjAxIC05Ljk2NzMsNC42NzMyNiAtMTMuODIyNSw3Ljc0NDk0Yy0wLjcyLDAuNTIyNzEgLTEuOTk2MTQsMC44MTU4NiAtMy44MjUxMiwwLjg4MTYxYy0wLjUyMzgyLDAgLTEuMDYzMjcsLTAuMjI5NjIgLTEuNjE3MTcsLTAuNjg1NDVjLTAuNTU2MTUsLTAuNDU2OTQgLTAuODMzNjgsLTAuOTgwOCAtMC44MzM2OCwtMS41NjgxN2MwLC0wLjc4NDYyIDAuODgyNzEsLTEuNzk2NjMgMi42NDcwMSwtMy4wNDA0N2MxLjI0MDQ4LC0wLjc4MzUyIDIuNDg0MzIsLTEuNjAxNTggMy43MjcwMywtMi40NTA4OGMwLjA2MzUyLC0wLjMyNTQzIC0xLjAxNDI0LC00LjE4MTc0IC0zLjIzODg1LC0xMS41Njc3OGMtMy41OTc3MiwtMC4wNjQ2MyAtOS4yNTYyNCwxLjExMDA4IC0xNi45NzMzLDMuNTI3NTJjLTAuNDU5MTksMC4xMzE1IC0wLjcyMTEsMC4zOTIzMSAtMC43ODU3NSwwLjc4NDYyYy0wLjA2NTc1LDAuMzkyMzEgLTAuMTYzODQsMS4wNDQzMyAtMC4yOTQyNSwxLjk1OTM3Yy0wLjEyNTk1LDAuMTk2MTggLTAuMjUwNzcsMC40ODkyNyAtMC4zNzU1OSwwLjg4MTU5YzAsMC4yNjE5MSAwLjM3NTU5LDAuNTQwNTQgMS4xMjc5LDAuODM0NzhjMC43NTAwOCwwLjI5NTM1IDEuMjI2MDEsMC41NzQgMS40MjEwNCwwLjgzMzY4YzAuMTk2MTgsMC4yNjE5MSAwLjI5NDI1LDAuNTg3MzYgMC4yOTQyNSwwLjk4MDhjMCwwLjc4MzUyIC0wLjM0MzI4LDEuNTIwMjMgLTEuMDI5ODYsMi4yMDY3OWMtMC42ODU0NSwwLjY4NTQ1IC0xLjUxOTEzLDEuMDI4NzEgLTIuNDk4ODEsMS4wMjg3MWMwLjA2NDYzLDAgLTEuMTEyMzEsLTAuMTYyNzIgLTMuNTI5NzQsLTAuNDg5MjdjLTAuNDU4MDksLTAuMDY0NjMgLTMuNDMxNjUsLTAuMzI2NTYgLTguOTIxODcsLTAuNzgzNWMtMi42MTQ3MiwtMC4yNjA4MSAtNC4zNDY3LC0wLjY1MzE0IC01LjE5NDg3LC0xLjE3Njk2Yy0wLjU4ODQ5LC0wLjM5MjMxIC0wLjg4Mjc0LC0wLjkxNTA1IC0wLjg4Mjc0LC0xLjU2ODE3YzAsLTEuNTY5MjcgMC43ODQ2MiwtMi40ODQzMiAyLjM1MjgxLC0yLjc0NTEyYzAuOTEzOTIsLTAuMTMwNCAyLjA5MDg4LC0wLjA2NTc1IDMuNTI4NjQsMC4xOTYxOGMwLjMyNjU2LDAuMTMxNSAyLjkwNjcxLDAuMzU4OSA3Ljc0NDk0LDAuNjg1NDVjMC4zOTIzMSwtMi43NDUxMiAxLjA0NTQzLC02LjU2OTExIDEuOTYwNDgsLTExLjQ2OTcyYzIuMDI1MTMsLTguMDM5MTkgNC4xNTA1NSwtMTguMjM0OTYgNi4zNzI5NiwtMzAuNTg3MzljLTAuNjU0MjQsLTAuMTI5MyAtMS4zMzk2NSwtMC4xOTYxOCAtMi4wNTg1NCwtMC4xOTYxOGMtMS4yNDI3MSwwIC0zLjA4ODQsMC4zNTk5NyAtNS41NDAzOCwxLjA3ODg3Yy0yLjQ0OTc4LDAuNzIgLTQuMjY0MjMsMS4wNzg4NyAtNS40NDExOSwxLjA3ODg3Yy0wLjQ1Njk0LDAgLTEuMTExMTgsLTAuMzU3NzcgLTEuOTYwNDgsLTEuMDc4ODdjLTAuMjYxOTEsLTAuNzg0NjIgLTAuMDgyNDcsLTEuNDg1NjcgMC41MzgzMSwtMi4xMDc1OGMwLjYyMDc4LC0wLjYyMDc4IDEuMzA3MzYsLTAuOTk2MzkgMi4wNTk2NywtMS4xMjc5YzAuNzUxMjEsLTAuMTMwNCAxLjk0MzczLC0wLjM1ODkgMy41Nzg4LC0wLjY4NjU2YzIuODA5NzUsLTAuNTIyNzEgNi4yMDc5OSwtMC45MTM5MiAxMC4xOTQ2NywtMS4xNzY5M2MxLjg5NDcyLC0wLjEyOTMgMi44NzU1MywtMC4xOTYxOCAyLjk0MTI1LC0wLjE5NjE4YzEuMDQ1NDMsMC4xMzE1IDEuODMwMDcsMC42Mzc1IDIuMzUyODEsMS41MTkxM2MwLjUyMjcxLDAuODgyNzEgMS4wNDU0NSwyLjMwMzc1IDEuNTY4MTcsNC4yNjQyM2MwLjY1MzEyLDIuNDE5NjQgMS4wOTMzNiwzLjg4OTc0IDEuMzI0MDYsNC40MTI0OGMwLjIyODQ3LDAuNTIzODIgMC42MDQwOCwxLjM3MjAxIDEuMTI3OTIsMi41NDg5NGMwLjI1OTY4LDAuNzgzNTIgMC43NTAwOCwxLjk2MDQ4IDEuNDcwMDgsMy41Mjg2MmMxLjUwMzUyLDMuNTk1NSAzLjg1NTE4LDkuMjE2MTIgNy4wNTk0OSwxNi44NjE4NWMxLjE3NTgzLDMuMTM3NDMgMy4wMzkzNyw3LjkwOTg5IDUuNTg4MzEsMTQuMzE0MDNjMS4xMTAwOCwtMC4xMzA0IDIuNTQ4OTQsLTAuNjg2NTggNC4zMTIxNCwtMS42NjYyNmMxLjc2NTQyLC0wLjk4MDggMy4wNzE2OCwtMS40NzAwOCAzLjkyMzE4LC0xLjQ3MDA4YzAuNzgzNTIsMCAxLjUzNDcsMC4yOTQyNSAyLjI1NDcsMC44ODE1OWMwLjE5NjE4LDAuMTk2MTggMC4zNTY2NywwLjY4NjU2IDAuNDg5MywxLjQ3MDA4YzAuMDY1NzUsMC44NTE1IC0wLjAzMjM0LDEuNDM5OTkgLTAuMjkyMDIsMS43NjY1MnpNMjQ2LjgwNDQyLDE4NC45MDY3M2MtMS4xMTU2NiwtMi4xNTY2MyAtMi41MjMzMSwtNS40MjY3IC00LjIyNjMxLC05LjgwNzk0Yy0wLjY1NTM0LC0xLjUwMzUyIC0yLjQyMzAyLC01LjQyNTU3IC01LjMwNjMzLC0xMS43Njk1MmwtNC44NDgyNCwyNC43MTU5OWM1Ljg3MDI3LC0xLjExMDA4IDEwLjQ2NjY0LC0xLjk2MDQ4IDEzLjc5MzU0LC0yLjU1MDA3YzAuMzkxMjEsLTAuMjU5NjggMC41ODczNiwtMC40NTY5NCAwLjU4NzM2LC0wLjU4ODQ5eiIvPjx0ZXh0IHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1MS4xMTM2LDE5MS44NTE3Nykgc2NhbGUoMC45MTY1NiwwLjkxNjU2KSIgZm9udC1zaXplPSI0MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1ydWxlPSJub256ZXJvIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWRhc2hhcnJheT0iIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgZm9udC1mYW1pbHk9IlNhbnMgU2VyaWYiIGZvbnQtd2VpZ2h0PSJub3JtYWwiIHRleHQtYW5jaG9yPSJzdGFydCIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjx0c3BhbiB4PSIwIiBkeT0iMCI+KzwvdHNwYW4+PC90ZXh0PjwvZz48L2c+PC9zdmc+PCEtLXJvdGF0aW9uQ2VudGVyOjI4Ljg4MDk1MzgxMjEwNjkyNDoyOS4zMTI5MTUwMDAwMDAxNDYtLT4=";
-
-class admireplus{
-  constructor (runtime){
+class admireplus {
+  constructor(runtime, id) {
+  
     this.runtime = runtime;
-    // communication related
-    this.comm = runtime.ioDevices.comm;
-    this.session = null;
-    this.runtime.registerPeripheralExtension('admireplus', this);
-    // session callbacks
-    this.reporter = null;
-    this.onmessage = this.onmessage.bind(this);
-    this.onclose = this.onclose.bind(this);
-    this.write = this.write.bind(this);
-    // string op
-    this.decoder = new TextDecoder();
-    this.lineBuffer = '';
+    this.menuIconURI = null;
+    this.blockIconURI = null;
+    this.colorScheme = ["#8b7fc9", "#8b7fc9"];
+
+    this.deleted_sprites = {};
+    this._sprites = [];
+    this._costumes = [];
+
+    this.audio_player = new Audio();
   }
 
-  onclose (){
-    this.session = null;
-  }
-
-  write (data, parser = null){
-    if (this.session){
-      return new Promise(resolve => {
-        if (parser){
-          this.reporter = {
-            parser,
-            resolve
-          }
-        }
-        this.session.write(data);
-      })
-    }
-  }
-
-  onmessage (data){
-    const dataStr = this.decoder.decode(data);
-    this.lineBuffer += dataStr;
-    if (this.lineBuffer.indexOf('\n') !== -1){
-      const lines = this.lineBuffer.split('\n');
-      this.lineBuffer = lines.pop();
-      for (const l of lines){
-        if (this.reporter){
-          const {parser, resolve} = this.reporter;
-          resolve(parser(l));
-        };
-      }
-    }
-  }
-
-  scan (){
-    this.comm.getDeviceList().then(result => {
-        this.runtime.emit(this.runtime.constructor.PERIPHERAL_LIST_UPDATE, result);
-    });
-  }
-
-  getInfo (){
+  getInfo() {
     return {
-      id: 'admireplus',
-      name: 'Admireblocks+',
-      color1: '#8b7fc9',
-      color2: '#8b7fc9',
-      menuIconURI: menuIconURI,
-      blockIconURI: blockIconURI,
+      id: "admireplus",
+      name: "Admireblocks+",
+      blockIconURI: this.blockIconURI,
+      menuIconURI: this.menuIconURI,
+      color1: this.colorScheme[0],
+      color2: this.colorScheme[1],
       blocks: [
         {
-          opcode: 'alertbox',
-          blockType: BlockType.COMMAND,
-          arguments: {
-            Text: {
-              type: ArgumentType.STRING
-            }
+            opcode: "evalsom",
+            blockType: "command",
+            text: "Javascript eval [es]",
+            arguments: {
+              es: {
+                type: "string",
+                defaultValue: "console.log('Admireblocks+')",
+              },
+            },
           },
-          text: 'Alert box [Text]'
+        {
+            opcode: "alertbox",
+            blockType: "command",
+            text: "Alert box [te]",
+            arguments: {
+              te: {
+                type: "string",
+                defaultValue: "Admireblocks+",
+              },
+            },
+          },
+        {
+          opcode: "csu",
+          blockType: "command",
+          text: "create sprite from the URL [url]",
+          arguments: {
+            url: {
+              type: "string",
+              defaultValue: "",
+            },
+          },
+        },
+        {
+          opcode: "ds",
+          blockType: "command",
+          text: "Delete sprite [sprite]",
+          arguments: {
+            sprite: {
+              type: "string",
+              defaultValue: "Sprite1",
+            },
+          },
+        },
+        {
+          opcode: "rs",
+          blockType: "command",
+          text: "Restore sprite [sprite]",
+
+          arguments: {
+            sprite: {
+              type: "string",
+              defaultValue: "Sprite1",
+            },
+          },
+        },
+        // costume stuff
+        {
+          opcode: "cco",
+          blockType: "command",
+          text: "Create costume from the URL [uri]",
+          arguments: {
+            costume: {
+              type: "string",
+              defaultValue: "costume1",
+            },
+            uri: {
+              type: "string",
+              defaultValue:
+                "https://en.scratch-wiki.info/w/images/ScratchCat3.0.svg",
+            },
+          },
+        },
+        {
+          opcode: "dc",
+          blockType: "command",
+          text: "Delete costume [costume]",
+          arguments: {
+            costume: {
+              type: "string",
+              defaultValue: "costume1",
+            },
+          },
+        },
+
+    
+        {
+          opcode: "playAudioFromURL",
+          blockType: "command",
+          text: "Play audio from URL [URL]",
+          arguments: {
+            URL: {
+              type: "string",
+              defaultValue: "",
+            },
+          },
+        },
+        {
+          opcode: "stopAudio",
+          blockType: "command",
+          text: "Stop audio",
+          arguments: {},
+        },
+        {
+          opcode: "sounds_done",
+          blockType: "boolean",
+          text: "Is the audio from URL Done?",
+        },
+        {
+          opcode: "loadUnsandBoxed",
+          blockType: "command",
+          text: "Load an unsandboxed extension from URI or URL [uri]",
+          arguments: {
+            uri: {
+              type: "string",
+              defaultValue: "",
+            },
+          },
+        },
+        {
+          opcode: "loadSandboxed",
+          blockType: "command",
+          text: "Load an sandboxed extension from the URI or URL [uri]",
+          arguments: {
+            uri: {
+              type: "string",
+              defaultValue: "",
+            },
+          },
+        },
+      ],
+    };
+  }
+
+  async csu(args) {
+    try {
+      const sprite_zip = await fetch(args.url);
+      if (sprite_zip.status == 200) {
+        const sprite_zip_buffer = await sprite_zip.blob();
+        var sprite = await vm.AddSprite(sprite_zip_buffer);
+        this._sprites.push(sprite.id);
+      } else {
+        console.log(
+          "Failed to fetch sprite:  Status: " + sprite_zip.status,
+          +" " + sprite_zip.statusText
+        );
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async ds(args, util) {
+    try {
+      var sprite = util.target;
+      this.deleted_sprites[args.sprite.id] = await vm.deleteSprite(sprite.id);
+      this._sprites.splice(this._sprites.indexOf(args.sprite), 1);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  async rs(args) {
+    try {
+      this.deleted_sprites[args.sprite.id]();
+      delete this.deleted_sprites[args.sprite.id];
+      this._sprites.push(args.sprite.id);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  // costumes
+  async cco(args, util) {
+    try {
+      // get current sprite
+      if (util.target.isSprite) {
+        var sprite = util.target.sprite;
+        const req = await fetch(args.uri);
+        if (req.status == 200) {
+          const blob = await req.blob();
+          const costume = await vm.addCostume(blob, sprite.id);
+          this._costumes.push(costume.id);
+        } else {
+          console.error("Failed to fetch costume");
         }
-      ]
+      } else {
+        console.error("Internal Error: Target is not a sprite");
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
-alertbox (args, util){
-  const Text = args.Text;
+  async dc(args, util) {
+    try {
+      // get current sprite
+      if (util.target.isSprite) {
+        var sprite = util.target.sprite;
+        this.deleted_costumes[args.costume] = await vm.deleteCostume(
+          sprite.costumes[args.costume].id
+        );
+        this._costumes.splice(this._costumes.indexOf(args.costume), 1);
+      } else {
+        console.error("Internal Error: Target is not a sprite");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
-  alert(args.Text);
+  playAudioFromURL({ URL }) {
+    this.audio_player.pause();
+    this.audio_player.currentTime = 0;
+    this.audio_player.src = URL;
+    this.audio_player.play();
+    this.audio_player.loop = false;
+  }
+
+  async alertbox(args) {
+   alert(args.te);
+  }
+
+  async evalsom(args) {
+    eval(args.es);
+   }
+
+  stopAudio({}) {
+    this.audio_player.pause();
+    this.audio_player.currentTime = 0;
+    this.audio_player.src = null;
+  }
+  sounds_done() {
+    return this.audio_player.ended;
+  }
+
+  async loadUnsandboxed(args) {
+    let req = await fetch(args.url);
+    if (req.status == 200) {
+      eval(req.responseText); 
+    } else {
+      console.error("Failed to fetch extention from url");
+      return;
+    }
+  }
+  async loadSandboxed(args) {
+    vm.extensionManager.loadExtensionURL(args.uri);
+  }
 }
 
-}
 
-module.exports = admireplus;
+(function () {
+  var extensionClass = admireplus;
+  if (typeof window === "undefined" || !window.vm) {
+    console.error("Admireblocks+ is not supported in this environment.");
+  } else {
+    var extensionInstance = new extensionClass(
+      window.vm.extensionManager.runtime
+    );
+    var serviceName =
+      window.vm.extensionManager._registerInternalExtension(extensionInstance);
+    window.vm.extensionManager._loadedExtensions.set(
+      extensionInstance.getInfo().id,
+      serviceName
+    );
+    console.log("Admireblocks+ has been loaded.");
+  }
+})();
