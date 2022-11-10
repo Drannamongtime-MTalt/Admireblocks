@@ -412,6 +412,36 @@ class AdmireBlocks {
                     }
                   },
                   {
+                    opcode: 'startswith',
+                    blockType: Scratch.BlockType.BOOLEAN,
+                    text: '[MJR] starts with [MJRT]?',
+                    arguments: {
+                        MJR: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: 'Admireblocks',
+                        },
+                        MJRT: {
+                            type: Scratch.ArgumentType.STRING,
+                            defaultValue: 'Admire'
+                        }
+                    }
+                  },
+                  {
+                    opcode: 'endswith',
+                    blockType: Scratch.BlockType.BOOLEAN,
+                    text: '[MJH] ends with [MJHT]?',
+                    arguments: {
+                        MJH: {
+                        type: Scratch.ArgumentType.STRING,
+                        defaultValue: 'Admireblocks'
+                        },
+                        MJHT: {
+                            type: Scratch.ArgumentType.STRING,
+                            defaultValue: 'blocks'
+                      }
+                    }
+                  },
+                  {
                     opcode: 'Crash',
                     blockType: Scratch.BlockType.COMMAND,
                     text: '(DANGEROUS!) Crash the window',
@@ -1073,6 +1103,19 @@ class AdmireBlocks {
         return INTHEALPHABET;
         
       }
+      
+      startswith(args) {
+        let text = args.MJR;
+        let result = text.startsWith(args.MJRT);
+        return result
+      }
+
+      endswith(args) {
+        let text = args.MJH;
+        let result = text.endsWith(args.MJHT);
+        return result
+      }
+
       chance({A}) {
         return Math.random() <= A / 100;
         
