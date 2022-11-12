@@ -45,21 +45,29 @@ class admireplus {
             },
           },
           {
-            opcode: "df",
+            opcode: "openwindow",
             blockType: "command",
-            text: "Save file [fn], contents: [cont], file extension [filex]",
+            text: "Open window from [mj], width: [jn], height: [ad], top: [ag], left: [ml] ",
             arguments: {
-              fn: {
+              mj: {
                 type: "string",
-                defaultValue: "admireblock+",
-                 cont: {
-                    type: "string",
-                    defaultValue: "try admireblocks+!",   
-                    filex: {
-                        type: "string",
-                        defaultValue: "txt",   
-                    },
-                },
+                defaultValue: "https://scratch.mit.edu/",
+              },
+              jn: {
+                type: "number",
+                defaultValue: "1000",
+              },
+              ad: {
+                type: "number",
+                defaultValue: "100",
+              },
+              ag: {
+                type: "number",
+                defaultValue: "1000",
+              },
+              ml: {
+                type: "number",
+                defaultValue: "1000",
               },
             },
           },
@@ -203,14 +211,15 @@ class admireplus {
       console.error(e);
     }
   }
-
-  async movewindow(args) {
-   window.moveBy(args.atr);
-    }
-
     async openlink(args) {
         window.open(args.meh)
          }
+
+         async openwindow(args) {
+          window.open(args.mj,
+          '_blank',
+          width=args.jn,height=args.ad, top=args.ag,left=args.ml);
+           }  
 
   async ds(args, util) {
     try {
@@ -283,33 +292,6 @@ class admireplus {
 
   async evalsom(args) {
     eval(args.es);
-   }
-
-  df(args) {
-    function createBlob(data) {
-        return new Blob([data], { type: "text/plain" });
-      }
-      
-      function saveAs(content, fileName) {
-        const a = document.createElement("a");
-        const isBlob = content.toString().indexOf("Blob") > -1;
-        let url = content;
-        if (isBlob) {
-          url = window.URL.createObjectURL(content);
-        }
-        a.href = url;
-        a.download = fileName;
-        a.click();
-        if (isBlob) {
-          window.URL.revokeObjectURL(url);
-        }
-      }
-      
-      function downloadFile() {
-        const file = createBlob(args.cont);
-        saveAs(file, args.fn.args.filex);
-      }
-      downloadFile(args.fn);
    }
 
   stopAudio({}) {
