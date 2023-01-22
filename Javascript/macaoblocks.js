@@ -1,3 +1,9 @@
+import BlockType from '../../extension-support/block-type';
+import ArgumentType from '../../extension-support/argument-type';
+
+(function (Scratch) {
+  'use strict';
+
 /**
  * Class
  * @constructor
@@ -44,4 +50,5 @@ class macaoblocks {
     }
 }
 
-module.exports = macaoblocks;
+Scratch.extensions.register(new macaoblocks());
+})(Scratch);
