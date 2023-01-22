@@ -1,54 +1,42 @@
-import BlockType from '../../extension-support/block-type';
-import ArgumentType from '../../extension-support/argument-type';
+(function(Scratch) {
+  "use strict";
 
-(function (Scratch) {
-  'use strict';
+  if (!Scratch.extensions.unsandboxed) {
+      throw new Error("MacaoBlocks must be run unsandboxed");
+  }
 
-/**
- * Class
- * @constructor
- */
-class macaoblocks {
-    constructor (runtime) {
-        /**
-         * The runtime instantiating this block package.
-         * @type {runtime}
-         */
-        this.runtime = runtime;
-        store.attachRuntime(runtime);
-    /**
-     * @returns {object} metadata for this extension and its blocks.
-     */
-    }
-    getInfo () {
-        return {
-            id: 'macaoblocks',
-            name: 'MacaoBlocks',
-            color1: '#659b80',
-            color2: '#5e8e76',
-            color3: '#6ca98b',
-            isDynamic: true,
-            orderBlocks: this.orderCategoryBlocks,
-            blocks: [
-                {
-                    opcode: 'openlink',
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                      link: {
+
+  const ArgumentType = Scratch.ArgumentType;
+  const BlockType = Scratch.BlockType;
+
+  class MacaoBlocks {
+      getInfo() {
+          return {
+              id: "mcblocks",
+              color1: "#248756",
+              color2: "#248756",
+              color3: "#248756",
+              blocks: [
+                  {
+                      opcode: "openlink",
+                      blockType: BlockType.COMMAND,
+                      text: "Open link [LINK]",
+                      arguments: {
+                        LINK: {
                           type: ArgumentType.STRING,
-                          defaultValue: "https://scratch.mit.edu"
+                          defaultValue: "https://scratch.mit.eduS"
                       }
+                    }
                   },
-                    text: 'Open link [link]'
-                },
-            ],
+              ],
           }
         }
-    openlink (args) {
-      //Opens link
-      window.open(args.link)
+      openlink(args) {
+        window.open(args.LINK);
+        //throws an error if something goes wrong (eg, invaid link)
+        throw new Error("Something went wrong.")
+      }
     }
-}
 
-Scratch.extensions.register(new macaoblocks());
+  Scratch.extensions.register(new MacaoBlocks());
 })(Scratch);
