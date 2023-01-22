@@ -1,6 +1,3 @@
-const BlockType = require('../../extension-support/block-type');
-const ArgumentType = require('../../extension-support/argument-type');
-
 /**
  * Class
  * @constructor
